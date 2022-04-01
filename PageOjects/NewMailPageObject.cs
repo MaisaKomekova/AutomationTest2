@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AT_Email.PageOjects
 {
-    class CreateMailPageObject
+    class NewMailPageObject
     {
         IWebDriver _driver;
 
@@ -20,7 +20,7 @@ namespace AT_Email.PageOjects
         private readonly By _meassgeBodyInput = By.XPath("//*[@id='cke_1_contents']/div/div");
         private readonly By _closeButton = By.XPath("//*[@id='js-apps-container']/div[2]/div[10]/div/div/div[1]/div/div[1]/div/div[2]/div/div[3]/button");
 
-        public CreateMailPageObject(IWebDriver driver)
+        public NewMailPageObject(IWebDriver driver)
         {
             _driver = driver;
         }
@@ -33,13 +33,13 @@ namespace AT_Email.PageOjects
             _driver.FindElement(_meassgeBodyInput).SendKeys(body);
         }
 
-        public MainPagePageObject SaveMessage()
-        { 
-            // так как почта автоматически сохраняет письмо в черновиках + нет кнопки "Сохранить" , нажимаем на кнопку закрыть
-            WaitShowElement(_closeButton);
-            _driver.FindElement(_closeButton).Click();
-            return new MainPagePageObject(this._driver);
-        }
+        //public MainPagePageObject SaveMessage()
+        //{ 
+        //    // так как почта автоматически сохраняет письмо в черновиках + нет кнопки "Сохранить" , нажимаем на кнопку закрыть
+        //    WaitShowElement(_closeButton);
+        //    _driver.FindElement(_closeButton).Click();
+        //    return new MainPagePageObject(this._driver);
+        //}
 
         public void WaitShowElement(By search)
         {

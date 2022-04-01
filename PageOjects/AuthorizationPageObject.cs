@@ -10,38 +10,36 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AT_Email.PageOjects
 {
-    class AuthorizationPageObject
+    class AuthorizationPageObject:BasePage
     {
-        IWebDriver _driver;
+        private string loginname = "maysaberdyevna";
+        private string password = "12345678Bb!";
+        private string Mail_To = "maysakomekova@yandex.ru";
+        private string Mail_Theme = "Epam";
+        private string Mail_Body = "Hello world!";
 
 
-        private readonly By _loginInput = By.XPath("//input[@name='login']");
-        private readonly By _loginButton = By.XPath("//button[@id='passp:sign-in']");
+        private static readonly By _authorizationLbl = By.XPath("//*[@class='passp-page-overlay']");
 
-        private readonly By _passwordInput = By.Name("passwd");
-        private readonly By _passwordButton = By.XPath("//button[@id='passp:sign-in']");
+        private readonly BaseElement _loginInput = new BaseElement(By.XPath("//input[@name='login']"));
+        private readonly BaseElement _loginButton = new BaseElement(By.XPath("//button[@id='passp:sign-in']"));
+
+        private readonly BaseElement _passwordInput = new BaseElement(By.Name("passwd"));
+        private readonly BaseElement _passwordButton = new BaseElement(By.XPath("//button[@id='passp:sign-in']"));
+
+        private readonly BaseElement _secretworddInput = new BaseElement(By.XPath("//input[@class='Textinput-Control']"));
+        private readonly BaseElement _secretworddButton = new BaseElement(By.TagName("button"));
 
 
-        public AuthorizationPageObject(IWebDriver driver)
+        public AuthorizationPageObject() : base(_authorizationLbl, "Authorization Page") { }
+
+
+        public void Login()
         {
-            this._driver = driver;
-        }
-
-        public MainPagePageObject Login(string  login, string password)
-        {
-            WaitShowElement(_loginInput);
-            _driver.FindElement(_loginInput).SendKeys(login);
-            _driver.FindElement(_loginButton).Click();
-            WaitShowElement(_passwordInput);
-            _driver.FindElement(_passwordInput).SendKeys(password);
-            _driver.FindElement(_passwordButton).Click();
-            return new  MainPagePageObject(_driver);
-        }
-
-        public void WaitShowElement(By search)
-        {
-            WebDriverWait iWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
-            iWait.Until(d => d.FindElement(search));
+           _loginInput.SendKeys(loginname);
+           _loginButton.Click();
+           _passwordInput.SendKeys(password);
+           _passwordButton.Click();
         }
 
     }
